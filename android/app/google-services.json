@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "575091440256",
+    "project_id": "durable-micron-332715",
+    "storage_bucket": "durable-micron-332715.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:575091440256:android:119c3dd1bd2ab8f3514465",
+        "android_client_info": {
+          "package_name": "com.example.flutter_application_1"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "575091440256-71pi6jdloc7efi1d47khokgivsckmncg.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB4scNOuCepM7IeM-hzufqoVM-w_Cboaqk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "575091440256-71pi6jdloc7efi1d47khokgivsckmncg.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
