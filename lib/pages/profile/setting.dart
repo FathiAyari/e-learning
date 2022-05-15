@@ -2,7 +2,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
-import '../homescreens/navigation.dart';
 import 'components/settings_notif.dart';
 import 'edit_profile.dart';
 
@@ -24,8 +23,7 @@ class _SettingsPageState extends State<SettingsPage> {
           Row(mainAxisAlignment: MainAxisAlignment.start, children: [
             IconButton(
               onPressed: () {
-                Navigator.pushReplacement(context,
-                    CupertinoPageRoute(builder: (context) => Navigation()));
+                /*       Get.to()*/
               },
               icon: const Icon(CupertinoIcons.arrow_left,
                   color: Color(0xffff5954)),

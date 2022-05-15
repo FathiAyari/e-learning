@@ -1,32 +1,29 @@
+import 'package:ahlem/models/user.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 
-import '../../models/end_user.dart';
-
 class RememberController extends GetxController {
-  RememberAdmin(EndUser user) {
+  RememberAdmin(Cusers user) {
     var storage = GetStorage();
     token(1);
     storage.write("user", {
-      'email': user.email,
+      'email': user.Email,
       'name': user.name,
-      'phone': user.phone,
-      'lastName': user.lastName,
+      'phone': user.Gsm,
+      'url': user.Url,
       'id': user.uid,
-      'email': user.email
     });
   }
 
-  RememberClient(EndUser user) {
+  RememberClient(Cusers user) {
     var storage = GetStorage();
     token(2);
     storage.write("user", {
-      'email': user.email,
+      'email': user.Email,
       'name': user.name,
-      'phone': user.phone,
-      'lastName': user.lastName,
+      'phone': user.Gsm,
+      'url': user.Url,
       'id': user.uid,
-      'email': user.email
     });
   }
 

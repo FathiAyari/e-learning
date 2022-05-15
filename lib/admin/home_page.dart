@@ -3,14 +3,14 @@ import 'package:flutter/material.dart';
 import 'add_student_page.dart';
 import 'list_student_page.dart';
 
-class HomePage extends StatefulWidget {
-  HomePage({Key? key}) : super(key: key);
+class HomePageAdmin extends StatefulWidget {
+  HomePageAdmin({Key? key}) : super(key: key);
 
   @override
   _HomePageState createState() => _HomePageState();
 }
 
-class _HomePageState extends State<HomePage> {
+class _HomePageState extends State<HomePageAdmin> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(

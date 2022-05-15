@@ -1,7 +1,15 @@
+import 'dart:async';
+
+import 'package:ahlem/admin/home_page.dart';
+import 'package:ahlem/pages/homescreens/navigation.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:lottie/lottie.dart';
 
+import '../OnBoarding/on_boarding_page.dart';
+import '../pages/auth/signin.dart';
 import '../utils/constant.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -16,16 +24,16 @@ class _SplashScreenState extends State<SplashScreen> {
 
   var type_auth = GetStorage().read("type_auth");
   @override
-/*  void initState() {
+  void initState() {
     super.initState();
     var timer = Timer(
         Duration(seconds: 3),
-            () => Get.to(resultSeen == 1
+        () => Get.to(resultSeen == 1
             ? (auth == 1
-            ? (type_auth == 1 ? HomePageAdmin() : HomePageClient())
-            : LoginScreen())
+                ? (type_auth == 1 ? HomePageAdmin() : HomePageStudent())
+                : LoginScreen())
             : OnBoardingPage()));
-  }*/
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -56,6 +64,7 @@ class _SplashScreenState extends State<SplashScreen> {
               ),
               Lottie.asset("assets/images/educa.json",
                   height: Constants.screenHeight * 0.3),
+              CircularProgressIndicator(),
             ])));
   }
 }

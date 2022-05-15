@@ -1,5 +1,8 @@
+import 'package:ahlem/pages/auth/signin.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 
 import '../services/remember_controller.dart';
 import '../utils/constant.dart';
@@ -16,19 +19,19 @@ PageController _controller = PageController();
 int currentPage = 0;
 List<Content> contentList = [
   Content(
-    img: 'images/camp.json',
+    img: 'assets/images/1.json',
     description:
         'êtes-vous intéressé par le camping en Tunisie? \n Campino est le mailleure solution pour vous .',
-    title: 'Bienvenue chez Campino ',
+    title: 'Bienvenue chez Educo ',
   ),
   Content(
-    img: 'images/location.json',
+    img: 'assets/images/2.json',
     description:
         'Nous vous proposons un guide et  un espace de partge de vous experience en camping ',
     title: '',
   ),
   Content(
-    img: 'images/cart.json',
+    img: 'assets/images/3.json',
     description:
         'Avec Campino vous êtes libre de vendre et acheter des equipement de camping en ligne',
     title: '',
@@ -41,6 +44,15 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+              begin: Alignment.topRight,
+              end: Alignment.bottomCenter,
+              colors: [
+                Colors.indigo,
+                Colors.blueGrey,
+              ]),
+        ),
         child: Stack(
           children: [
             PageView.builder(
@@ -94,7 +106,7 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
                           child: InkWell(
                             onTap: () {
                               onBoardingController.check();
-                              /*Get.to(SignInScreen());*/
+                              Get.to(LoginScreen());
                             },
                             child: Text(
                               "Ignorer",
@@ -112,7 +124,7 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
                           child: ElevatedButton(
                               onPressed: (currentPage == contentList.length - 1)
                                   ? () {
-                                      /*       Get.to(SignInScreen());*/
+                                      Get.to(LoginScreen());
                                     }
                                   : () {
                                       onBoardingController.check();

@@ -1,23 +1,23 @@
+import 'package:ahlem/admin/gerer_course/home_course.dart';
 import 'package:bottom_navy_bar/bottom_navy_bar.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import '../../chat/chat.dart';
-import '../../splash/screen.dart';
 import '../notications/notification_screen.dart';
 import '../profile/setting.dart';
 
-class Navigation extends StatefulWidget {
-  const Navigation({Key? key}) : super(key: key);
+class HomePageStudent extends StatefulWidget {
+  const HomePageStudent({Key? key}) : super(key: key);
 
   @override
-  State<Navigation> createState() => _NavigationState();
+  State<HomePageStudent> createState() => _NavigationState();
 }
 
-class _NavigationState extends State<Navigation> {
+class _NavigationState extends State<HomePageStudent> {
   int _currentIndex = 0;
   final pages = [
-    Course(),
+    HomeCourse(),
     chat(),
     NotificationsScreen(),
     SettingsPage(),
