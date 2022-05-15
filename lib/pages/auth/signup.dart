@@ -1,21 +1,22 @@
 //ne9sa reg exp confirm pass ?
+import 'dart:io';
+
 import 'package:ahlem/pages/auth/signin.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 
 import '../../services/auth_services.dart';
+import '../../utils/constant.dart';
+import 'alertTask.dart';
 
-bool showSpinner = false; //hedhi aka lcnx li dour
-
-TextEditingController _numController = new TextEditingController();
-TextEditingController _nomPrenomController = new TextEditingController();
-TextEditingController _emailController = new TextEditingController();
-TextEditingController _passController = new TextEditingController();
-TextEditingController _confirmPassController = new TextEditingController();
-bool _isPassVisible = true;
 final _formKey = GlobalKey<FormState>();
 
 class SignupScreen extends StatefulWidget {
@@ -25,10 +26,32 @@ class SignupScreen extends StatefulWidget {
 
 final FirebaseFirestore _firebaseFirestore = FirebaseFirestore.instance;
 final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
-AuthService _authServices =
-    new AuthService(); //instance ta3 l authservices eli fyha les fonctions lkol
 
 class _SignupScreenState extends State<SignupScreen> {
+  bool showSpinner = false; //hedhi aka lcnx li dour
+
+  TextEditingController _numController = new TextEditingController();
+  TextEditingController _nomPrenomController = new TextEditingController();
+  TextEditingController _emailController = new TextEditingController();
+  TextEditingController _passController = new TextEditingController();
+  TextEditingController _confirmPassController = new TextEditingController();
+  bool _isPassVisible = true;
+  bool loading = false;
+  File? _image;
+
+  bool check = false;
+  File? pdfFile;
+  Future getProfileImage() async {
+    final image = await ImagePicker().pickImage(
+      source: ImageSource.gallery,
+    );
+
+    setState(() {
+      _image = File(image!.path);
+      check = true;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -62,9 +85,36 @@ class _SignupScreenState extends State<SignupScreen> {
                       //  const SizedBox(height: 16,),
                       //  SvgPicture.asset( "assets/icons/undraw_verified_re_4io7.svg", height: 120 ),
 
-                      //NAME
-                      const SizedBox(
-                        height: 15,
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Stack(
+                          alignment: AlignmentDirectional.bottomEnd,
+                          children: [
+                            CircleAvatar(
+                              backgroundColor: Colors.white38,
+                              radius: 50,
+                              backgroundImage: _image == null
+                                  ? AssetImage('assets/images/user.png')
+                                      as ImageProvider
+                                  : FileImage(_image!),
+                            ),
+                            Transform.translate(
+                              offset: Offset(5, 5),
+                              child: CircleAvatar(
+                                backgroundColor: Colors.transparent,
+                                child: IconButton(
+                                    onPressed: () {
+                                      getProfileImage();
+                                    },
+                                    icon: Icon(
+                                      Icons.add_photo_alternate_sharp,
+                                      color: Colors.blueAccent,
+                                      size: Constants.screenHeight * 0.03,
+                                    )),
+                              ),
+                            ),
+                          ],
+                        ),
                       ),
                       Padding(
                           padding: const EdgeInsets.only(
@@ -112,6 +162,7 @@ class _SignupScreenState extends State<SignupScreen> {
                               bottom: 15, left: 10, right: 10),
                           child: TextFormField(
                               controller: _emailController,
+                              keyboardType: TextInputType.emailAddress,
                               decoration: InputDecoration(
                                 prefixIcon: const Icon(
                                     CupertinoIcons.mail_solid,
@@ -243,54 +294,7 @@ class _SignupScreenState extends State<SignupScreen> {
                       const SizedBox(
                         height: 15,
                       ),
-                      Padding(
-                          padding: const EdgeInsets.only(
-                              bottom: 15, left: 10, right: 10),
-                          child: TextFormField(
-                            obscureText: true,
-                            controller: _confirmPassController,
-                            maxLines: 1,
-                            decoration: InputDecoration(
-                              labelText: 'Confirmer le  Mot de passe',
-                              hintText: 'Confirmer',
-                              prefixIcon: const Icon(CupertinoIcons.lock_fill,
-                                  color: Color(0xffff5954)),
-                              suffix: InkWell(
-                                  onTap: () {
-                                    setState(() {
-                                      _isPassVisible = !_isPassVisible;
-                                    });
-                                  },
-                                  child: Icon(
-                                      _isPassVisible
-                                          ? CupertinoIcons.eye_slash_fill
-                                          : Icons.remove_red_eye,
-                                      color: const Color(0xffff5954))),
-                              floatingLabelBehavior:
-                                  FloatingLabelBehavior.always,
-                              contentPadding: const EdgeInsets.symmetric(
-                                  horizontal: 42, vertical: 20),
-                              enabledBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(28),
-                                borderSide:
-                                    const BorderSide(color: Color(0xffff5954)),
-                                gapPadding: 10,
-                              ),
-                              focusedBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(28),
-                                borderSide:
-                                    const BorderSide(color: Color(0xffff5954)),
-                                gapPadding: 10,
-                              ),
-                            ),
-                            validator: (value) {
-                              if (value.toString().length < 6) {
-                                return 'Password should be longer or equal to 6 characters';
-                              } else {
-                                return null;
-                              }
-                            },
-                          )),
+
                       //L Boutton
                       const SizedBox(height: 13),
                       Padding(
@@ -303,7 +307,65 @@ class _SignupScreenState extends State<SignupScreen> {
                                         Radius.circular(60)),
                                     color: const Color(0xffff5954),
                                     onPressed: (() async {
-                                      if (_formKey.currentState!.validate()) {
+                                      if (_formKey.currentState!.validate() &&
+                                          !_image!.path.isEmpty) {
+                                        setState(() {
+                                          loading = true;
+                                        });
+                                        var image = FirebaseStorage
+                                            .instance // instance
+                                            .ref(_image!
+                                                .path); //ref=> esm de fichier fel storage
+                                        var task = image.putFile(_image!);
+                                        var imageUrl =
+                                            await (await task) // await 1: attendre l'upload d'image dans firestorage,2await: attendre la recuperation de lien getDownloadURL
+                                                .ref
+                                                .getDownloadURL();
+                                        bool check = await AuthServices()
+                                            .signUp(
+                                                _emailController.text,
+                                                _passController.text,
+                                                _nomPrenomController.text,
+                                                imageUrl.toString(),
+                                                _numController.text);
+
+                                        if (check) {
+                                          setState(() {
+                                            loading = false;
+                                          });
+                                          alertTask(
+                                            lottieFile: "images/success.json",
+                                            action: "Connecter",
+                                            message:
+                                                "Votre compte a été créé avec succès",
+                                            press: () {
+                                              Get.to(() => (LoginScreen));
+                                            },
+                                          ).show(context);
+                                        } else {
+                                          setState(() {
+                                            loading = false;
+                                          });
+                                          alertTask(
+                                            lottieFile: "images/error.json",
+                                            action: "Ressayer",
+                                            message: "Email déja existe",
+                                            press: () {
+                                              Navigator.pop(context);
+                                            },
+                                          ).show(context);
+                                        }
+                                      } else if (_image.isNull) {
+                                        Fluttertoast.showToast(
+                                            msg: "Image obligatoire",
+                                            toastLength: Toast.LENGTH_SHORT,
+                                            gravity: ToastGravity.BOTTOM,
+                                            timeInSecForIosWeb: 1,
+                                            backgroundColor: Colors.grey,
+                                            textColor: Colors.white,
+                                            fontSize: 16.0);
+                                      }
+                                      /*      if (_formKey.currentState!.validate()) {
                                         print("SUCESS");
                                         if (_passController.text
                                                 .trim()
@@ -322,7 +384,7 @@ class _SignupScreenState extends State<SignupScreen> {
                                               content: Text(
                                                   'Email/Password are invalid'),
                                             );
-                                            /*ScaffoldMessenger.of(context).showSnackBar(snackBar);*/
+                                            */ /*ScaffoldMessenger.of(context).showSnackBar(snackBar);*/ /*
                                           } else {
                                             Navigator.pushReplacement(
                                                 context,
@@ -331,7 +393,7 @@ class _SignupScreenState extends State<SignupScreen> {
                                                         LoginScreen()));
                                           }
                                         }
-                                      }
+                                      }*/
                                     }),
                                     child: const Text('Enregistrer',
                                         style:

@@ -2,13 +2,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
-import '../../services/auth_services.dart';
-import '../auth/signin.dart';
 import '../homescreens/navigation.dart';
 import 'components/settings_notif.dart';
 import 'edit_profile.dart';
-
-AuthService _authService = AuthService();
 
 //CarsServices _carsServices = CarsServices();
 class SettingsPage extends StatefulWidget {
@@ -79,8 +75,8 @@ class _SettingsPageState extends State<SettingsPage> {
             icon: 'assets/icons/deconnexion.svg',
             text: 'Deconnesxion',
             press: () {
-              _authService.logout().then((value) => Navigator.push(context,
-                  CupertinoPageRoute(builder: (context) => LoginScreen())));
+              /*           _authService.logout().then((value) => Navigator.push(context,
+                  CupertinoPageRoute(builder: (context) => LoginScreen())));*/
             },
           ),
           ProfileMenu(
@@ -91,7 +87,7 @@ class _SettingsPageState extends State<SettingsPage> {
           //boutton li bch tfasakhli user
           TextButton(
               onPressed: () {
-                _authService.deleteUser();
+                /*           _authService.deleteUser();*/
               },
               child: Text('delete john')), //bch tfasakhli user id jhon*/
         ]),

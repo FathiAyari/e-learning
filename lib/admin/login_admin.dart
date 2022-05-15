@@ -7,8 +7,6 @@ import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 
 import '../pages/auth/signup.dart';
 import '../pages/forgotpass/forgot_password.dart';
-import '../services/auth_services.dart';
-import 'fonctionalite.dart';
 
 bool showSpinner = false; //hedhi aka lcnx li dour
 
@@ -24,7 +22,7 @@ class LoginAdmin extends StatefulWidget {
   _LoginAdminState createState() => _LoginAdminState();
 }
 
-AuthService _authServices = new AuthService();
+/*AuthService _authServices = new AuthService();*/
 //instance ta3 l authservices eli fyha les fonctions lkol
 
 class _LoginAdminState extends State<LoginAdmin> {
@@ -196,7 +194,7 @@ class _LoginAdminState extends State<LoginAdmin> {
                                     const BorderRadius.all(Radius.circular(60)),
                                 color: const Color(0xffff5954),
                                 onPressed: (() async {
-                                  if (_formKey.currentState!.validate()) {
+                                  /*      if (_formKey.currentState!.validate()) {
                                     print("sucess");
                                     if (_passController.text
                                             .trim()
@@ -214,8 +212,8 @@ class _LoginAdminState extends State<LoginAdmin> {
                                           content: Text(
                                               'Email/Password are invalid'),
                                         );
-                                        /*ScaffoldMessenger.of(context)
-                                                .showSnackBar(snackBar);*/
+                                        */ /*ScaffoldMessenger.of(context)
+                                                .showSnackBar(snackBar);*/ /*
                                       } else {
                                         Navigator.pushReplacement(
                                             context,
@@ -224,7 +222,7 @@ class _LoginAdminState extends State<LoginAdmin> {
                                                     FonctionaliteAdmin()));
                                       }
                                     }
-                                  }
+                                  }*/
                                 }),
                                 child: const Text('Connexion',
                                     style: TextStyle(color: Colors.white)))),

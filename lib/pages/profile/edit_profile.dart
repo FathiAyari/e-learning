@@ -7,11 +7,9 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-import '../../services/auth_services.dart';
-import '../homescreens/navigation.dart';
 import 'components/profile_pic.dart';
 
-AuthService _authServices = new AuthService();
+/*AuthService _authServices = new AuthService();*/
 final FirebaseFirestore _firebaseFirestore = FirebaseFirestore.instance;
 final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
 TextEditingController _nomPrenomController = new TextEditingController();
@@ -283,16 +281,16 @@ class _EditProfileState extends State<EditProfile> {
                                       Radius.circular(60)),
                                   color: Color(0xffff5954),
                                   onPressed: (() {
-                                    _authServices.updateUserDocument(
+                                    /*   _authServices.updateUserDocument(
                                         FirebaseAuth.instance.currentUser!.uid);
-                                    /*if(_formKey.currentState!.validate()){
+                                    */ /*if(_formKey.currentState!.validate()){
                      _formKey.currentState!.save();
-                     print('sucess');*/
+                     print('sucess');*/ /*
                                     Navigator.pushReplacement(
                                         context,
                                         CupertinoPageRoute(
                                             builder: (context) =>
-                                                Navigation()));
+                                                Navigation()));*/
                                   }),
                                   child: const Text('Enregistrer',
                                       style: TextStyle(
