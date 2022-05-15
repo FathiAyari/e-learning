@@ -4,8 +4,9 @@ import 'package:bottom_navy_bar/bottom_navy_bar.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-import '../../pages/notications/notification_screen.dart';
 import 'components/courses.dart';
+import 'components/friends.dart';
+import 'components/messages/Messages.dart';
 import 'components/setting.dart';
 
 class HomePageStudent extends StatefulWidget {
@@ -19,7 +20,7 @@ class _NavigationState extends State<HomePageStudent> {
   int _currentIndex = 0;
   final pages = [
     Courses(),
-    Text("chat"),
+    buildMessages(),
     NotificationsScreen(),
     SettingsPage(),
   ];

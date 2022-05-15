@@ -1,7 +1,11 @@
 import 'package:ahlem/utils/constant.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 
+import '../../services/auth_services.dart';
+import '../auth/alertTask.dart';
 import '../auth/signin.dart';
 import '../auth/signup.dart';
 
@@ -17,6 +21,7 @@ class ForgotPass extends StatefulWidget {
 }
 
 class _ForgotPassState extends State<ForgotPass> {
+  bool loading = false;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -44,9 +49,7 @@ class _ForgotPassState extends State<ForgotPass> {
                       style: TextStyle(color: Color(0xFF8B8B8B), fontSize: 18)),
                 ],
               ),
-              const SizedBox(
-                height: 16,
-              ),
+
               Container(
                 height: Constants.screenHeight * 0.2,
                 child: Column(
@@ -72,9 +75,7 @@ class _ForgotPassState extends State<ForgotPass> {
               ),
 
               //Email
-              const SizedBox(
-                height: 42,
-              ),
+
               Padding(
                   padding:
                       const EdgeInsets.only(bottom: 15, left: 10, right: 10),
@@ -113,26 +114,60 @@ class _ForgotPassState extends State<ForgotPass> {
                         return null;
                       })),
               const SizedBox(height: 15),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 16),
-                child: Row(
-                  children: [
-                    Expanded(
-                        child: CupertinoButton(
-                            borderRadius:
-                                const BorderRadius.all(Radius.circular(20)),
-                            color: Colors.indigo,
-                            onPressed: (() {
-                              if (_formKey.currentState!.validate()) {}
-                            }),
-                            child: const Text('réientaliser mot de passe',
-                                style: TextStyle(color: Colors.white)))),
-                  ],
-                ),
-              ),
-              SizedBox(
-                height: Constants.screenHeight * 0.2,
-              ),
+              loading
+                  ? Center(
+                      child: CircularProgressIndicator(),
+                    )
+                  : Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 16),
+                      child: Row(
+                        children: [
+                          Expanded(
+                              child: CupertinoButton(
+                                  borderRadius: const BorderRadius.all(
+                                      Radius.circular(20)),
+                                  color: Colors.indigo,
+                                  onPressed: (() {
+                                    if (_formKey.currentState!.validate()) {
+                                      setState(() {
+                                        loading = true;
+                                      });
+                                      AuthServices()
+                                          .resetPassword(_emailController.text)
+                                          .then((value) {
+                                        setState(() {
+                                          loading = false;
+                                        });
+                                        if (value) {
+                                          alertTask(
+                                            lottieFile:
+                                                "assets/images/success.json",
+                                            action: "Connecter",
+                                            message: "Consultez vos mail svp",
+                                            press: () {
+                                              Get.to(() => LoginScreen());
+                                            },
+                                          ).show(context);
+                                        } else {
+                                          alertTask(
+                                            lottieFile:
+                                                "assets/images/error.json",
+                                            action: "Ressayer",
+                                            message: "compte n'existe pas ",
+                                            press: () {
+                                              Navigator.pop(context);
+                                            },
+                                          ).show(context);
+                                        }
+                                      });
+                                    }
+                                  }),
+                                  child: const Text('réientaliser mot de passe',
+                                      style: TextStyle(color: Colors.white)))),
+                        ],
+                      ),
+                    ),
+
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
