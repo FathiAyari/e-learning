@@ -1,24 +1,24 @@
-import 'package:ahlem/admin/update_student_page.dart';
+// ignore_for_file: prefer_const_constructors
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
-class ListStudentPage extends StatefulWidget {
-  ListStudentPage({Key? key}) : super(key: key);
+class ListUsersPage extends StatefulWidget {
+  ListUsersPage({Key? key}) : super(key: key);
 
   @override
-  _ListStudentPageState createState() => _ListStudentPageState();
+  _ListUsersPageState createState() => _ListUsersPageState();
 }
 
-class _ListStudentPageState extends State<ListStudentPage> {
-  final Stream<QuerySnapshot> studentsStream =
-      FirebaseFirestore.instance.collection('students').snapshots();
+class _ListUsersPageState extends State<ListUsersPage> {
+  final Stream<QuerySnapshot> userStream =
+      FirebaseFirestore.instance.collection('users').snapshots();
 
   // For Deleting User
-  CollectionReference students =
-      FirebaseFirestore.instance.collection('students');
+  CollectionReference user = FirebaseFirestore.instance.collection('users');
   Future<void> deleteUser(id) {
     // print("User Deleted $id");
-    return students
+    return user
         .doc(id)
         .delete()
         .then((value) => print('User Deleted'))
@@ -28,7 +28,7 @@ class _ListStudentPageState extends State<ListStudentPage> {
   @override
   Widget build(BuildContext context) {
     return StreamBuilder<QuerySnapshot>(
-        stream: studentsStream,
+        stream: userStream,
         builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
           if (snapshot.hasError) {
             print('Something went Wrong');
@@ -61,10 +61,10 @@ class _ListStudentPageState extends State<ListStudentPage> {
                     children: [
                       TableCell(
                         child: Container(
-                          color: Colors.greenAccent,
+                          color: Color(0xff2657ce),
                           child: Center(
                             child: Text(
-                              'Name',
+                              'NomPrénom',
                               style: TextStyle(
                                 fontSize: 20.0,
                                 fontWeight: FontWeight.bold,
@@ -75,7 +75,7 @@ class _ListStudentPageState extends State<ListStudentPage> {
                       ),
                       TableCell(
                         child: Container(
-                          color: Colors.greenAccent,
+                          color: Color(0xff2657ce),
                           child: Center(
                             child: Text(
                               'Email',
@@ -89,7 +89,7 @@ class _ListStudentPageState extends State<ListStudentPage> {
                       ),
                       TableCell(
                         child: Container(
-                          color: Colors.greenAccent,
+                          color: Color(0xff2657ce),
                           child: Center(
                             child: Text(
                               'Action',
@@ -108,7 +108,7 @@ class _ListStudentPageState extends State<ListStudentPage> {
                       children: [
                         TableCell(
                           child: Center(
-                              child: Text(storedocs[i]['name'],
+                              child: Text(storedocs[i]['nomPrenom'],
                                   style: TextStyle(fontSize: 18.0))),
                         ),
                         TableCell(
@@ -121,18 +121,10 @@ class _ListStudentPageState extends State<ListStudentPage> {
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               IconButton(
-                                onPressed: () => {
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (context) => UpdateStudentPage(
-                                          id: storedocs[i]['id']),
-                                    ),
-                                  )
-                                },
+                                onPressed: () => {},
                                 icon: Icon(
                                   Icons.edit,
-                                  color: Colors.orange,
+                                  color: Color(0xff2657ce),
                                 ),
                               ),
                               IconButton(

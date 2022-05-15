@@ -5,8 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 
-import '../pages/auth/signup.dart';
-import '../pages/forgotpass/forgot_password.dart';
+import '../../pages/auth/signup.dart';
+import '../../pages/forgotpass/forgot_password.dart';
 
 bool showSpinner = false; //hedhi aka lcnx li dour
 

@@ -1,16 +1,16 @@
 import 'dart:async';
 
-import 'package:ahlem/admin/home_page.dart';
-import 'package:ahlem/pages/homescreens/navigation.dart';
+import 'package:ahlem/screens/student/student_home_page.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:lottie/lottie.dart';
 
-import '../OnBoarding/on_boarding_page.dart';
-import '../pages/auth/signin.dart';
-import '../utils/constant.dart';
+import '../../OnBoarding/on_boarding_page.dart';
+import '../../pages/auth/signin.dart';
+import '../../utils/constant.dart';
+import '../admin/home_page.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({Key? key}) : super(key: key);

@@ -1,25 +1,23 @@
-// ignore_for_file: prefer_const_constructors
-
-import 'package:ahlem/admin/gerer_uti/update_student_page.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
-class ListUsersPage extends StatefulWidget {
-  ListUsersPage({Key? key}) : super(key: key);
+class ListStudentPage extends StatefulWidget {
+  ListStudentPage({Key? key}) : super(key: key);
 
   @override
-  _ListUsersPageState createState() => _ListUsersPageState();
+  _ListStudentPageState createState() => _ListStudentPageState();
 }
 
-class _ListUsersPageState extends State<ListUsersPage> {
-  final Stream<QuerySnapshot> userStream =
-      FirebaseFirestore.instance.collection('users').snapshots();
+class _ListStudentPageState extends State<ListStudentPage> {
+  final Stream<QuerySnapshot> studentsStream =
+      FirebaseFirestore.instance.collection('students').snapshots();
 
   // For Deleting User
-  CollectionReference user = FirebaseFirestore.instance.collection('users');
+  CollectionReference students =
+      FirebaseFirestore.instance.collection('students');
   Future<void> deleteUser(id) {
     // print("User Deleted $id");
-    return user
+    return students
         .doc(id)
         .delete()
         .then((value) => print('User Deleted'))
@@ -29,7 +27,7 @@ class _ListUsersPageState extends State<ListUsersPage> {
   @override
   Widget build(BuildContext context) {
     return StreamBuilder<QuerySnapshot>(
-        stream: userStream,
+        stream: studentsStream,
         builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
           if (snapshot.hasError) {
             print('Something went Wrong');
@@ -62,10 +60,10 @@ class _ListUsersPageState extends State<ListUsersPage> {
                     children: [
                       TableCell(
                         child: Container(
-                          color: Color(0xff2657ce),
+                          color: Colors.greenAccent,
                           child: Center(
                             child: Text(
-                              'NomPrénom',
+                              'Name',
                               style: TextStyle(
                                 fontSize: 20.0,
                                 fontWeight: FontWeight.bold,
@@ -76,7 +74,7 @@ class _ListUsersPageState extends State<ListUsersPage> {
                       ),
                       TableCell(
                         child: Container(
-                          color: Color(0xff2657ce),
+                          color: Colors.greenAccent,
                           child: Center(
                             child: Text(
                               'Email',
@@ -90,7 +88,7 @@ class _ListUsersPageState extends State<ListUsersPage> {
                       ),
                       TableCell(
                         child: Container(
-                          color: Color(0xff2657ce),
+                          color: Colors.greenAccent,
                           child: Center(
                             child: Text(
                               'Action',
@@ -109,7 +107,7 @@ class _ListUsersPageState extends State<ListUsersPage> {
                       children: [
                         TableCell(
                           child: Center(
-                              child: Text(storedocs[i]['nomPrenom'],
+                              child: Text(storedocs[i]['name'],
                                   style: TextStyle(fontSize: 18.0))),
                         ),
                         TableCell(
@@ -122,18 +120,10 @@ class _ListUsersPageState extends State<ListUsersPage> {
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               IconButton(
-                                onPressed: () => {
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (context) => UpdateUsersPage(
-                                          uid: storedocs[i]['id']),
-                                    ),
-                                  )
-                                },
+                                onPressed: () => {},
                                 icon: Icon(
                                   Icons.edit,
-                                  color: Color(0xff2657ce),
+                                  color: Colors.orange,
                                 ),
                               ),
                               IconButton(

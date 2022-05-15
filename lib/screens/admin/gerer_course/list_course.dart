@@ -1,6 +1,5 @@
 // ignore_for_file: prefer_const_constructors
 
-import 'package:ahlem/admin/gerer_course/update_course.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
@@ -104,15 +103,7 @@ class _ListCourseState extends State<ListCourse> {
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               IconButton(
-                                onPressed: () => {
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (context) =>
-                                          UpdateCourse(id: storedocs[i]['id']),
-                                    ),
-                                  )
-                                },
+                                onPressed: () => {},
                                 icon: Icon(
                                   Icons.edit,
                                   color: Color(0xff2657ce),

@@ -1,8 +1,8 @@
+import 'package:ahlem/services/remember_controller.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
-import 'components/settings_notif.dart';
 import 'edit_profile.dart';
 
 //CarsServices _carsServices = CarsServices();
@@ -14,6 +14,7 @@ class SettingsPage extends StatefulWidget {
 }
 
 class _SettingsPageState extends State<SettingsPage> {
+  RememberController rememberController = RememberController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -29,7 +30,6 @@ class _SettingsPageState extends State<SettingsPage> {
                   color: Color(0xffff5954)),
             ),
           ]),
-
           SizedBox(
             height: 10,
           ),
@@ -42,39 +42,60 @@ class _SettingsPageState extends State<SettingsPage> {
           SizedBox(
             height: 40,
           ),
-
           ProfileMenu(
             icon: 'assets/icons/utilisateur.svg',
-            text: 'My account',
+            text: 'Mon compte',
             press: () {
               Navigator.pushReplacement(context,
                   CupertinoPageRoute(builder: (context) => EditProfile()));
             },
           ),
-
           SizedBox(
             height: 40,
-          ),
-          ProfileMenu(
-            //HEDHOM L MENU TA3 L PROFILE
-            icon: 'assets/icons/cloche.svg',
-            text: 'Notifications',
-            press: () {
-              Navigator.pushReplacement(context,
-                  CupertinoPageRoute(builder: (context) => setNotif()));
-            },
           ),
           Divider(
             height: 15,
             thickness: 2,
           ),
-
           ProfileMenu(
             icon: 'assets/icons/deconnexion.svg',
             text: 'Deconnesxion',
             press: () {
-              /*           _authService.logout().then((value) => Navigator.push(context,
-                  CupertinoPageRoute(builder: (context) => LoginScreen())));*/
+              showDialog(
+                  context: context,
+                  builder: (context) {
+                    return AlertDialog(
+                      title: Text("êtes-vous sûr de vouloir vous déconnecter?"),
+                      actions: [
+                        Container(
+                            decoration: BoxDecoration(
+                              color: Colors.redAccent.withOpacity(0.5),
+                              borderRadius: BorderRadius.circular(20),
+                              border: Border.all(
+                                color: Colors.transparent,
+                              ),
+                            ),
+                            child: TextButton(
+                                onPressed: () {
+                                  Navigator.pop(context);
+                                },
+                                child: Text("Non"))),
+                        Container(
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(20),
+                              color: Colors.blueAccent,
+                            ),
+                            child: TextButton(
+                                onPressed: () {
+                                  rememberController.Logout();
+                                },
+                                child: Text(
+                                  "Oui",
+                                  style: TextStyle(color: Colors.white),
+                                ))),
+                      ],
+                    );
+                  });
             },
           ),
           ProfileMenu(
@@ -82,12 +103,6 @@ class _SettingsPageState extends State<SettingsPage> {
             text: 'Aide',
             press: () {},
           ),
-          //boutton li bch tfasakhli user
-          TextButton(
-              onPressed: () {
-                /*           _authService.deleteUser();*/
-              },
-              child: Text('delete john')), //bch tfasakhli user id jhon*/
         ]),
       )),
     );

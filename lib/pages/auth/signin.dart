@@ -15,6 +15,7 @@ import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 
+import '../../screens/student/student_home_page.dart';
 import '../../services/auth_services.dart';
 import '../forgotpass/forgot_password.dart';
 import 'infoMessage.dart';
@@ -266,7 +267,6 @@ class _LoginScreenState extends State<LoginScreen> {
                                                     Cusers.fromJson(
                                                         UserData.data() as Map<
                                                             String, dynamic>));
-                                                //navigation
                                               } else if (Cusers.fromJson(
                                                           UserData.data()
                                                               as Map<String,
@@ -277,7 +277,8 @@ class _LoginScreenState extends State<LoginScreen> {
                                                     Cusers.fromJson(
                                                         UserData.data() as Map<
                                                             String, dynamic>));
-                                                //navigation
+
+                                                Get.to(() => HomePageStudent());
                                                 print("client");
                                               }
                                               setState(() {

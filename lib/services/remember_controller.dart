@@ -1,4 +1,5 @@
 import 'package:ahlem/models/user.dart';
+import 'package:ahlem/pages/auth/signin.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 
@@ -37,7 +38,7 @@ class RememberController extends GetxController {
     var storage = GetStorage();
     storage.write("auth", 0);
     storage.remove("user");
-    /* Get.to(());*/
+    Get.to(LoginScreen());
   }
 
   check() {
