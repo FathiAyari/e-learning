@@ -1,5 +1,6 @@
 //hero?
 
+import 'dart:io';
 import 'dart:isolate';
 import 'dart:ui';
 
@@ -9,8 +10,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_downloader/flutter_downloader.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
+import 'package:permission_handler/permission_handler.dart';
 
 class CoursePage extends StatefulWidget {
   const CoursePage({Key? key}) : super(key: key);
@@ -185,9 +188,8 @@ class _CursePageState extends State<CoursePage> {
                                               .replaceAll("%20", "-");
 
                                           var pathFile =
-                                              test.substring(2, test.length);
+                                              test.substring(3, test.length);
                                           print(pathFile);
-/*
                                           var status = await Permission.storage
                                               .request();
                                           if (status.isGranted) {
@@ -233,7 +235,7 @@ class _CursePageState extends State<CoursePage> {
                                                 // textColor: Colors.pink
                                               );
                                             }
-                                          }*/
+                                          }
                                         },
                                       ),
                                       SlidableAction(
