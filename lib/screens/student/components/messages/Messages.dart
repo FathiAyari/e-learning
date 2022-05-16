@@ -180,7 +180,7 @@ class _buildMessagesState extends State<buildMessages> {
                                                                   radius: 33,
                                                                   backgroundImage:
                                                                       NetworkImage(
-                                                                          "${snapshot.data!.docs[0].get('url')}")),
+                                                                          "${snapshot.data!.docs[0].get('Url')}")),
                                                             );
                                                           } else {
                                                             return Center(
