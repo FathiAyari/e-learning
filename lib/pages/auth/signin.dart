@@ -4,6 +4,7 @@ import 'dart:io';
 
 import 'package:ahlem/models/user.dart';
 import 'package:ahlem/pages/auth/signup.dart';
+import 'package:ahlem/screens/admin/home_page.dart';
 import 'package:ahlem/services/remember_controller.dart';
 import 'package:ahlem/utils/constant.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -267,6 +268,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                                     Cusers.fromJson(
                                                         UserData.data() as Map<
                                                             String, dynamic>));
+                                                Get.to(HomePageAdmin());
                                               } else if (Cusers.fromJson(
                                                           UserData.data()
                                                               as Map<String,
