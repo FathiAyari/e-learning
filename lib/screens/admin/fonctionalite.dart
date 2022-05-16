@@ -26,7 +26,8 @@ class FonctionaliteAdmin extends StatelessWidget {
           ),
         ),
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center, //lektiba  lkol f center
+          mainAxisAlignment: MainAxisAlignment.center,
+          //lektiba  lkol f center
           children: [
             Row(
               //hedhy ligne loula fiha titre WELCOME TO EDUCA
