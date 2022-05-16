@@ -138,7 +138,7 @@ class _SignupScreenState extends State<SignupScreen> {
                                   color: Colors.indigo),
                               filled: true,
                               fillColor: Colors.grey.withOpacity(0.5),
-                              hintText: 'Entrer votre Email',
+                              hintText: 'Entrer votre nom',
                               hintStyle: TextStyle(color: Colors.indigo),
                               floatingLabelBehavior:
                                   FloatingLabelBehavior.always,
@@ -156,11 +156,7 @@ class _SignupScreenState extends State<SignupScreen> {
                                 //
                                 return 'Veuiller saisir votre Email';
                               }
-                              if (!RegExp(
-                                      r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^¨_'{}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
-                                  .hasMatch(value)) {
-                                return "L'addresse Email est incorecte  ";
-                              }
+
                               return null;
                             })),
 
@@ -217,7 +213,7 @@ class _SignupScreenState extends State<SignupScreen> {
                             bottom: 15, left: 10, right: 10),
                         child: TextFormField(
                             controller: _numController,
-                            keyboardType: TextInputType.emailAddress,
+                            keyboardType: TextInputType.phone,
                             decoration: InputDecoration(
                               border: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(20),

@@ -21,19 +21,19 @@ List<Content> contentList = [
   Content(
     img: 'assets/images/1.json',
     description:
-        'êtes-vous intéressé par le camping en Tunisie? \n Campino est le mailleure solution pour vous .',
+        'Boreass experimentum! \n Sunt resistentiaes imperium velox, dexter buboes. .',
     title: 'Bienvenue chez Educo ',
   ),
   Content(
     img: 'assets/images/2.json',
     description:
-        'Nous vous proposons un guide et  un espace de partge de vous experience en camping ',
+        'Grandis, talis decors satis imperium de ferox, primus magister. Trabem patienter ducunt ad salvus glos. ',
     title: '',
   ),
   Content(
     img: 'assets/images/3.json',
     description:
-        'Avec Campino vous êtes libre de vendre et acheter des equipement de camping en ligne',
+        'Nunquam perdere indictio. Est varius xiphias, cesaris. Cum musa trabem, omnes capioes desiderium flavum, grandis demolitionees. ',
     title: '',
   )
 ];
