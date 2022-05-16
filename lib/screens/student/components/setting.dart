@@ -64,7 +64,7 @@ class _SettingsPageState extends State<SettingsPage> {
               showDialog(
                   context: context,
                   builder: (context) {
-                    return AlertDialog(
+                    return CupertinoAlertDialog(
                       title: Text("êtes-vous sûr de vouloir vous déconnecter?"),
                       actions: [
                         Container(

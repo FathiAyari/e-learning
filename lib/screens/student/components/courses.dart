@@ -9,6 +9,16 @@ class Courses extends StatefulWidget {
 }
 
 class _CourseState extends State<Courses> {
+  void openCoursePage(
+      String img,
+      String title,
+      String
+          doc) //title zedtha bch ywali yetbadel l titre ta3 kol cour w pages mte3ou wahdhha
+  {
+    Navigator.pushNamed(context, '/coursePage',
+        arguments: {'img': '$img', 'title': '$title', 'doc': '$doc'});
+  }
+
   var user = GetStorage().read("user");
   @override
   Widget build(BuildContext context) {
@@ -59,12 +69,12 @@ class _CourseState extends State<Courses> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       courseWidget('php', '', 'img1', Color(0xffff6a65),
-                          Color(0xffff5954)),
+                          Color(0xffff5954), 'php'),
                       SizedBox(
                         height: 20,
                       ),
-                      courseWidget('Social Media', 'Social Media Monitoring',
-                          'img2', Color(0xffe9eefa), Colors.white),
+                      courseWidget('Java script', 'Master JS', 'img2',
+                          Color(0xffe9eefa), Colors.white, 'javascript'),
                     ],
                   ),
                 ),
@@ -77,12 +87,12 @@ class _CourseState extends State<Courses> {
                         height: 50,
                       ),
                       courseWidget('Programming', 'Python for everybody',
-                          'img3', Color(0xffe9eefa), Colors.white),
+                          'img3', Color(0xffe9eefa), Colors.white, 'python'),
                       SizedBox(
                         height: 20,
                       ),
-                      courseWidget('Graphique Design', 'Fundamentals of Design',
-                          'img4', Color(0xffbdcddfa), Colors.blueAccent),
+                      courseWidget('Java', 'OOP JAVA', 'img4',
+                          Color(0xffbdcddfa), Colors.blueAccent, 'java'),
                     ],
                   ),
                 ),
@@ -95,13 +105,15 @@ class _CourseState extends State<Courses> {
   }
 
   Container courseWidget(String category, String title, String img,
-      Color categoryColor, Color bgColor) {
+      Color categoryColor, Color bgColor, String doc) {
     return Container(
-      padding: EdgeInsets.only(top: 20, left: 20, right: 20, bottom: 10),
+      padding: EdgeInsets.only(top: 20, left: 10, right: 10, bottom: 10),
       decoration: BoxDecoration(
           color: bgColor, borderRadius: BorderRadius.all(Radius.circular(30))),
       child: InkWell(
-        onTap: () {},
+        onTap: () {
+          openCoursePage('$img', '$title', '$doc');
+        },
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
